@@ -1,62 +1,54 @@
 import 'package:flutter/material.dart';
-import 'main2.dart';
-void main() => runApp(MyApp());
+import 'main.dart';
 
-class MyApp extends StatelessWidget {
+class prov extends StatefulWidget {
+  late List myIntegers;
+prov(this.myIntegers);
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ProviderPage(),
-    );
-  }
+  State<prov> createState() => _provState();
 }
 
-class ProviderPage extends StatefulWidget {
-  @override
-  State<ProviderPage> createState() => _ProviderPageState();
-}
-
-class _ProviderPageState extends State<ProviderPage> {
-  late String displayText;
+class _provState extends State<prov> {
   int increment = 0;
-  List<int> integers = [];
 
   void callBack() {
     setState(() {
       if (increment >= 10) {
-       integers.clear();
+        widget.myIntegers.clear();
         increment = 0;
       } else {
         increment++;
-       integers.add(increment);
-      print(integers);
+        widget.myIntegers.add(increment);
+        print(widget.myIntegers);
       }
     });
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orangeAccent,
+
+
         title: Center(
           child: Text(
-            integers.isNotEmpty ? integers.last.toString() : "",
+            widget.myIntegers.isNotEmpty ?   widget.myIntegers.last.toString() : "",
           ),
         ),
-        actions: [
-          IconButton(onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => prov(integers)),
-            );
-          },
 
 
-            icon:
-          Icon(Icons.forward),
+        backgroundColor: Colors.orangeAccent,
+        leading:IconButton(
+          onPressed:
+          (){
+            Navigator.pop(context);
+          }
+          ,
+          icon:Icon(Icons.directions) ,
+        ) ,
 
-          )
-        ],
       ),
       body: Container(
         child: Column(
@@ -68,11 +60,11 @@ class _ProviderPageState extends State<ProviderPage> {
                   height: 600,
                   width: 600,
                   child: ListView.builder(
-                    itemCount: integers.length,
+                    itemCount: widget.myIntegers.length,
                     itemBuilder: (context, index) {
                       return ListTile(
                         title: Text(
-                          integers[index].toString(),
+                          widget.myIntegers[index].toString(),
                         ),
                       );
                     },
