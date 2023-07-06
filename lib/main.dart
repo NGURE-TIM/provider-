@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/list_provider.dart';
 import 'main2.dart';
+import 'package:provider/provider.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ProviderPage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context)=>Numbers())
+      ],
+      child: MaterialApp(
+        home: ProviderPage(),
+      ),
     );
   }
 }
