@@ -7,7 +7,7 @@ class Numbers extends ChangeNotifier {
   List<int> integers = [];
 
   void callBack() {
-    setState(() {
+
       if (increment >= 10) {
         integers.clear();
         increment = 0;
@@ -16,7 +16,7 @@ class Numbers extends ChangeNotifier {
         integers.add(increment);
         print(integers);
       }
-    });
+    notifyListeners();
   }
 
 
